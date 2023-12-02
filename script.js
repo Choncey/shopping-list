@@ -57,7 +57,6 @@ function addItemToDOM(item) {
   const button = createButton('remove-item btn-link text-red');
   li.appendChild(button);
 
-  // Add li to the DOM
   itemList.appendChild(li);
 }
 
@@ -78,7 +77,7 @@ function createIcon(classes) {
 function addItemToStorage(item) {
   const itemsFromStorage = getItemsFromStorage();
 
-  // Add new item to array
+  // Add new item
   itemsFromStorage.push(item);
 
   // Convert to JSON string and set to local storage
@@ -107,18 +106,17 @@ function onClickItem(e) {
 
 function checkIfItemExists(item) {
   const itemsFromStorage = getItemsFromStorage();
+
   return itemsFromStorage.includes(item);
 }
 
 function setItemToEdit(item) {
   isEditMode = true;
-
   itemList
     .querySelectorAll('li')
     .forEach((i) => i.classList.remove('edit-mode'));
-
   item.classList.add('edit-mode');
-  formBtn.innerHTML = '<i class="fa-solid fa-pen"></i>   Update Item';
+  formBtn.innerHTML = '<i class="fa-solid fa-pen"></i> Update Item';
   formBtn.style.backgroundColor = '#228B22';
   itemInput.value = item.textContent;
 }
@@ -161,7 +159,7 @@ function filterItems(e) {
   const text = e.target.value.toLowerCase();
 
   items.forEach((item) => {
-    const itemName = item.firstChild.textContent.toLowerCase();
+    const itemName = item.innerText.toLowerCase();
 
     if (itemName.indexOf(text) != -1) {
       item.style.display = 'flex';
